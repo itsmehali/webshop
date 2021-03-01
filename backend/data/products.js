@@ -1,6 +1,5 @@
 const products = [
   {
-    _id: '1',
     name: 'Iphone X',
     image: '/images/iphone.jpg',
     description:
@@ -13,7 +12,6 @@ const products = [
     numReviews: 11,
   },
   {
-    _id: '2',
     name: 'Iphone 11',
     image: '/images/iphone2.jpg',
     description:
@@ -26,7 +24,6 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: '3',
     name: 'Blue & Black Running Shoe',
     image: '/images/huawei.jpg',
     description:
@@ -39,7 +36,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: '4',
     name: 'Sony Playstation 4 Pro White Version',
     image: '/images/huawei2.jpg',
     description:
@@ -52,7 +48,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '5',
     name: 'Logitech G-Series Gaming Mouse',
     image: '/images/samsung.jpg',
     description:
@@ -65,7 +60,6 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: '6',
     name: 'Amazon Echo Dot 3rd Generation',
     image: '/images/samsung2.jpg',
     description:
@@ -78,7 +72,6 @@ const products = [
     numReviews: 7,
   },
   {
-    _id: '7',
     name: 'Sony Xperia L3',
     image: '/images/xperia.jpg',
     description:
@@ -91,7 +84,6 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: '8',
     name: 'Sony Xperia L1',
     image: '/images/xperia2.jpg',
     description:

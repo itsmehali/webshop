@@ -20,7 +20,7 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     category: {
-      type: Boolean,
+      type: String,
       required: true,
       default: false,
     },
@@ -30,7 +30,7 @@ const productSchema = mongoose.Schema(
       default: 0,
     },
     description: {
-      type: Boolean,
+      type: String,
       required: true,
       default: false,
     },
