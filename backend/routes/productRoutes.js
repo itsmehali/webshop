@@ -3,6 +3,13 @@ import asyncHandler from 'express-async-handler';
 const router = express.Router();
 import Product from '../models/Product.js';
 
+/*
+ I use asyncHandler so I dont need to use try / catch blocks
+*/
+
+// @desc    Get all products
+// @route   GET api/products
+// @acces   Public
 router.get(
   '/',
   asyncHandler(async (req, res) => {
@@ -12,6 +19,9 @@ router.get(
   })
 );
 
+// @desc    Get product by ID
+// @route   GET api/products/:id
+// @acces   Public
 router.get(
   '/:id',
   asyncHandler(async (req, res) => {
