@@ -13,7 +13,7 @@ import {
 import { listPorductDetails } from '../actions/productActions';
 
 const ProductScreen = ({ history, match }) => {
-  const [quanity, setQuanity] = useState(0);
+  const [quanity, setQuanity] = useState(1);
 
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ const ProductScreen = ({ history, match }) => {
   }, [dispatch, match]);
 
   const addToCart = () => {
-    // Add to cart button, and seting using history, and to pass the quanity
+    // Add to cart button, and setting using history, and to pass the quanity
     history.push(`/cart/${match.params.id}?qty=${quanity}`);
   };
 
