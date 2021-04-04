@@ -32,6 +32,14 @@ const CartScreen = ({ match, location, history }) => {
     console.log('asd');
   };
 
+  const submitHandler = () => {
+    history.push('/login?redirect=shipping');
+  };
+
+  const redirectHandler = () => {
+    history.push('/');
+  };
+
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
@@ -45,11 +53,17 @@ const CartScreen = ({ match, location, history }) => {
           {cartItems.map(item => (
             <ListGroup.Item key={item.product}>
               <Row>
-                <Col md={3}><h4>{item.name}</h4></Col>
-                <Col md={4}>
-                  <Image src={item.image} alt={item.name} fluid />
-                </Col>
                 <Col md={3}>
+                  <Link to={`/product/${item.product}`}>
+                    <h4>{item.name}</h4>
+                  </Link>
+                </Col>
+                <Col md={4}>
+                  <Link to={`/product/${item.product}`}>
+                    <Image src={item.image} alt={item.name} fluid />
+                  </Link>
+                </Col>
+                <Col md={2}>
                   <Form.Control
                     as='select'
                     value={item.qty}
@@ -64,8 +78,8 @@ const CartScreen = ({ match, location, history }) => {
                     ))}
                   </Form.Control>
                 </Col>
-                <Col md={2}>
-                  <h2> {item.price}</h2>
+                <Col md={3}>
+                  <h2> {item.price} €</h2>
                   <Button
                     size='sm'
                     type='button'
@@ -80,8 +94,47 @@ const CartScreen = ({ match, location, history }) => {
           ))}
         </ListGroup>
       </Col>
-      <Col md={3}>-</Col>
-      <Col md={3}>Total</Col>
+      <Col md={3}>
+        <Card>
+          <ListGroup variant='flush'>
+            <ListGroup.Item>
+              <h3>
+                Total items:
+                {cartItems.reduce(
+                  (accumulater, current) => accumulater + current.qty,
+                  0
+                )}
+              </h3>
+              <h5>Total Price:</h5>
+              <strong>
+                {cartItems
+                  .reduce(
+                    (accumulater, current) =>
+                      accumulater + current.qty * current.price,
+                    0
+                  )
+                  .toFixed(2)}
+                €
+              </strong>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Button
+                type='button'
+                className='btn-block'
+                disabled={cartItems.length === 0}
+                onClick={submitHandler}
+              >
+                Order
+              </Button>
+            </ListGroup.Item>
+          </ListGroup>
+        </Card>
+      </Col>
+      <Col md={3}>
+        <Button type='button' className='btn-block' onClick={redirectHandler}>
+          Back to shopping
+        </Button>
+      </Col>
     </Row>
   );
 };
