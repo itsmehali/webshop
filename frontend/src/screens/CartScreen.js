@@ -9,7 +9,7 @@ import {
   ListGroup,
   Container,
 } from 'react-bootstrap';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -29,7 +29,7 @@ const CartScreen = ({ match, location, history }) => {
   const { cartItems } = cart;
 
   const removeItem = id => {
-    console.log('asd');
+    dispatch(removeFromCart(id));
   };
 
   const submitHandler = () => {
