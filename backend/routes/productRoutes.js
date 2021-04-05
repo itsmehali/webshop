@@ -1,23 +1,24 @@
 import express from 'express';
+import {
+  getProducts,
+  getProductById,
+} from '../controllers/productController.js';
 import asyncHandler from 'express-async-handler';
-const router = express.Router();
-import Product from '../models/Product.js';
 
+const router = express.Router();
+
+// router.get('/', getProducts);
 /*
- I use asyncHandler so I dont need to use try / catch blocks
+  router.methods() -> routing functionality, where METHOD
+  is one of the HTTP methods (get,put, post)
 */
 
-// @desc    Get all products
-// @route   GET api/products
-// @acces   Public
-router.get(
-  '/',
-  asyncHandler(async (req, res) => {
-    const products = await Product.find({});
-
-    res.json(products);
-  })
-);
+/*
+  router.route instance of single route to handle HTTP methods
+  & avoiding duplicate route naming
+*/
+router.route('/').get(getProducts);
+router.route('/:id').get(getProductById);
 
 // @desc    Get product by ID
 // @route   GET api/products/:id
