@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = mongoose.Schema(
   {
@@ -25,6 +26,12 @@ const userSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+/* Method defined here, to use for checking if the user has
+given the correct password */
+userSchema.methods.isPasswordMatch = async function (theGivenPassword) {
+  return await bcrypt.compare(theGivenPassword, this.password);
+};
 
 const User = mongoose.model('User', userSchema);
 
