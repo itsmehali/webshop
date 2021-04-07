@@ -9,12 +9,20 @@ const protect = asyncHandler(async (req, res, next) => {
     req.headers.authorization.startsWith('Bearer')
   ) {
     try {
-      // Only want the token, we dont want the "Bearer"
+      {
+        /*  assigning token
+        dont want the Bearer so we split is
+       and Bearer is the 0 index and the token is the 1 index
+      */
+      }
       token = req.headers.authorization.split(' ')[1];
-      // getting back the token
+      // decode token, verify token, then passing our secret
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      console.log(decoded);
+      // put in req.user all of the rest data except the password
+      req.user = await (await User.findById(decoded.id)).isSelected(
+        '-password'
+      );
 
       next();
     } catch (err) {}
