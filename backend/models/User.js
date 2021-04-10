@@ -33,6 +33,17 @@ userSchema.methods.isPasswordMatch = async function (theGivenPassword) {
   return await bcrypt.compare(theGivenPassword, this.password);
 };
 
+// salting and making sure the password is hashed
+userSchema.pre('save', async function (next) {
+  // using mongoose if its not modified
+  if (!this.isModified('password')) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
 const User = mongoose.model('User', userSchema);
 
 export default User;
