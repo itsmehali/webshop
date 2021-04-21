@@ -4,14 +4,13 @@ import {
   getProfile,
   registerUser,
 } from '../controllers/userController.js';
-import asyncHandler from 'express-async-handler';
-import { protect } from '../middleware/authMiddleware.js';
+import { auth } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
 // routes
 router.route('/login').post(authUser);
-router.route('/profile').get(protect, getProfile);
+router.route('/profile').get(auth, getProfile);
 router.route('/').post(registerUser);
 
 export default router;

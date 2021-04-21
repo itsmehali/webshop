@@ -3,10 +3,10 @@ import User from '../models/User.js';
 import asyncHandler from 'express-async-handler';
 
 /*
-@protect: this method defines which route can be protected
+@auth: this method defines which route can be protected
 */
 
-const protect = asyncHandler(async (req, res, next) => {
+const auth = asyncHandler(async (req, res, next) => {
   let token;
   if (
     req.headers.authorization &&
@@ -40,4 +40,4 @@ const protect = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { protect };
+export { auth };

@@ -13,7 +13,7 @@ const Loader = () => {
       role='status'
       animation='border'
     >
-      <span className='spinner'>Loading...</span>
+      <span className='spinner'></span>
     </Spinner>
   );
 };

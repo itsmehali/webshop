@@ -13,13 +13,13 @@ const PaymentScreen = ({ history }) => {
     history.push('/shipping');
   }
 
-  const [payment, setPayment] = useState('Visa');
+  const [paymentMethod, setPaymentMethod] = useState('Visa');
 
   const dispatch = useDispatch();
 
   const submitHandler = e => {
     e.preventDefault();
-    dispatch(savePaymentMethod({ payment }));
+    dispatch(savePaymentMethod(paymentMethod));
     history.push('/order');
   };
 
@@ -36,9 +36,9 @@ const PaymentScreen = ({ history }) => {
             id='Visa'
             label='Visa'
             value='Visa'
-            name='payment'
+            name='paymentMethod'
             checked
-            onChange={e => setPayment(e.target.value)}
+            onChange={e => setPaymentMethod(e.target.value)}
           ></Form.Check>
 
           <Form.Check
@@ -46,8 +46,8 @@ const PaymentScreen = ({ history }) => {
             id='MasterCard'
             label='MasterCard'
             value='MasterCard'
-            name='payment'
-            onChange={e => setPayment(e.target.value)}
+            name='paymentMethod'
+            onChange={e => setPaymentMethod(e.target.value)}
           ></Form.Check>
 
           <Form.Check
@@ -55,8 +55,8 @@ const PaymentScreen = ({ history }) => {
             id='PayPal'
             label='PayPal'
             value='PayPal'
-            name='payment'
-            onChange={e => setPayment(e.target.value)}
+            name='paymentMethod'
+            onChange={e => setPaymentMethod(e.target.value)}
           ></Form.Check>
         </Col>
         <Button type='submit' variant='primary'>
