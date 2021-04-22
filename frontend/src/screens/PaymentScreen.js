@@ -38,7 +38,9 @@ const PaymentScreen = ({ history }) => {
             value='Visa'
             name='paymentMethod'
             checked
-            onChange={e => setPaymentMethod(e.target.value)}
+            onChange={e => {
+              setPaymentMethod(e.target.value);
+            }}
           ></Form.Check>
 
           <Form.Check
@@ -47,7 +49,9 @@ const PaymentScreen = ({ history }) => {
             label='MasterCard'
             value='MasterCard'
             name='paymentMethod'
-            onChange={e => setPaymentMethod(e.target.value)}
+            onChange={e => {
+              setPaymentMethod(e.target.value);
+            }}
           ></Form.Check>
 
           <Form.Check
@@ -56,7 +60,9 @@ const PaymentScreen = ({ history }) => {
             label='PayPal'
             value='PayPal'
             name='paymentMethod'
-            onChange={e => setPaymentMethod(e.target.value)}
+            onChange={e => {
+              setPaymentMethod(e.target.value);
+            }}
           ></Form.Check>
         </Col>
         <Button type='submit' variant='primary'>

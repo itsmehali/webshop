@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Button, Col, Row, Image, Card, ListGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Message from '../components/Message';
+import { createOrder } from '../actions/orderActions';
 
-const OrderScreen = () => {
+const OrderScreen = ({ history }) => {
+  const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
 
   cart.itemsPrice = cart.cartItems.reduce(
@@ -22,8 +24,28 @@ const OrderScreen = () => {
     Number(cart.taxPrice)
   ).toFixed(2);
 
+  const orderCreate = useSelector(state => state.orderCreate);
+  const { order, success, error } = orderCreate;
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/success`);
+    }
+    // eslint-disable-next-line
+  }, [history, success]);
+
   const orderHandler = () => {
-    console.log('asd');
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        //paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    );
   };
 
   return (
@@ -120,6 +142,9 @@ const OrderScreen = () => {
                     </h5>
                   </Col>
                 </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {error && <Message variant='danger'>{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button

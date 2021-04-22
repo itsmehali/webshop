@@ -44,7 +44,7 @@ const RegisterScreen = ({ location, history }) => {
 
   return (
     <FormSkeleton>
-      <h1>Sign in</h1>
+      <h1>Register</h1>
       {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
