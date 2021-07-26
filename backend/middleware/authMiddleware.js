@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
-import asyncHandler from 'express-async-handler';
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
+import asyncHandler from "express-async-handler";
 
 /*
 @auth: this method defines which route can be protected
@@ -10,7 +10,7 @@ const auth = asyncHandler(async (req, res, next) => {
   let token;
   if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
+    req.headers.authorization.startsWith("Bearer")
   ) {
     try {
       {
@@ -19,25 +19,35 @@ const auth = asyncHandler(async (req, res, next) => {
        and Bearer is the 0 index and the token is the 1 index
       */
       }
-      token = req.headers.authorization.split(' ')[1];
+      token = req.headers.authorization.split(" ")[1];
       // decode token, verify token, then passing our secret
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       // put in req.user all of the rest data except the password
-      req.user = await User.findById(decoded.id).select('-password');
+      req.user = await User.findById(decoded.id).select("-password");
 
       next();
     } catch (err) {
       console.error(err);
       res.status(401);
-      throw new Error('Token has failed, could not authorized!');
+      throw new Error("Token has failed, could not authorized!");
     }
   }
 
   if (!token) {
     res.status(401);
-    throw new Error('Not authorized, no token');
+    throw new Error("Not authorized, no token");
   }
 });
 
-export { auth };
+// function to check if the user is admin
+const isAdmin = (req, res, next) => {
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error("Not authorized as an admin");
+  }
+};
+
+export { auth, isAdmin };

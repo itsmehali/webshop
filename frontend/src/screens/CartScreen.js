@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   Row,
   Col,
@@ -7,12 +7,11 @@ import {
   Button,
   Card,
   ListGroup,
-  Container,
-} from 'react-bootstrap';
-import { addToCart, removeFromCart } from '../actions/cartActions';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import Message from '../components/Message';
+} from "react-bootstrap";
+import { addToCart, removeFromCart } from "../actions/cartActions";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import Message from "../components/Message";
 
 const CartScreen = ({ match, location, history }) => {
   // getting the product id from url
@@ -20,25 +19,25 @@ const CartScreen = ({ match, location, history }) => {
 
   // getting the quanity
   // ?qty=1  getting the number with split('=') after this is the number
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1;
+  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
 
   // dispatch for calling the action
   const dispatch = useDispatch();
 
   // getting data
-  const cart = useSelector(state => state.cart);
+  const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
 
-  const removeItem = id => {
+  const removeItem = (id) => {
     dispatch(removeFromCart(id));
   };
 
   const submitHandler = () => {
-    history.push('/login?redirect=shipping');
+    history.push("/login?redirect=shipping");
   };
 
   const redirectHandler = () => {
-    history.push('/');
+    history.push("/");
   };
 
   useEffect(() => {
@@ -52,11 +51,11 @@ const CartScreen = ({ match, location, history }) => {
         <h1>Your items</h1>
         {cartItems.length === 0 ? (
           <Message>
-            Your cart is empty <Link to='/'>Go Back</Link>
+            Your cart is empty <Link to="/">Go Back</Link>
           </Message>
         ) : (
-          <ListGroup variant='flush'>
-            {cartItems.map(item => (
+          <ListGroup variant="flush">
+            {cartItems.map((item) => (
               <ListGroup.Item key={item.product}>
                 <Row>
                   <Col md={3}>
@@ -71,15 +70,15 @@ const CartScreen = ({ match, location, history }) => {
                   </Col>
                   <Col md={2}>
                     <Form.Control
-                      as='select'
+                      as="select"
                       value={item.qty}
-                      onChange={e =>
+                      onChange={(e) =>
                         dispatch(
                           addToCart(item.product, Number(e.target.value))
                         )
                       }
                     >
-                      {[...Array(item.countInStock).keys()].map(i => (
+                      {[...Array(item.countInStock).keys()].map((i) => (
                         <option key={i + 1} value={i + 1}>
                           {i + 1}
                         </option>
@@ -89,12 +88,12 @@ const CartScreen = ({ match, location, history }) => {
                   <Col md={3}>
                     <h2> {item.price} €</h2>
                     <Button
-                      size='sm'
-                      type='button'
+                      size="sm"
+                      type="button"
                       onClick={() => removeItem(item.product)}
                     >
-                      {' '}
-                      <i className='fas fa-trash'></i>
+                      {" "}
+                      <i className="fas fa-trash"></i>
                     </Button>
                   </Col>
                 </Row>
@@ -108,7 +107,7 @@ const CartScreen = ({ match, location, history }) => {
 
       <Col md={3}>
         <Card>
-          <ListGroup variant='flush'>
+          <ListGroup variant="flush">
             <ListGroup.Item>
               <h3>
                 Total items:
@@ -131,8 +130,8 @@ const CartScreen = ({ match, location, history }) => {
             </ListGroup.Item>
             <ListGroup.Item>
               <Button
-                type='button'
-                className='btn-block'
+                type="button"
+                className="btn-block"
                 disabled={cartItems.length === 0}
                 onClick={submitHandler}
               >
@@ -143,7 +142,7 @@ const CartScreen = ({ match, location, history }) => {
         </Card>
       </Col>
       <Col md={3}>
-        <Button type='button' className='btn-block' onClick={redirectHandler}>
+        <Button type="button" className="btn-block" onClick={redirectHandler}>
           Back to shopping
         </Button>
       </Col>

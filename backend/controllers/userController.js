@@ -1,6 +1,6 @@
-import asyncHandler from 'express-async-handler';
-import User from '../models/User.js';
-import jwtToken from '../others/jwtToken.js';
+import asyncHandler from "express-async-handler";
+import User from "../models/User.js";
+import jwtToken from "../others/jwtToken.js";
 
 // @desc    Auth user and get token
 // @route   POST api/users/login
@@ -23,7 +23,7 @@ const authUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(401);
-    throw new Error('The email or password does not match');
+    throw new Error("The email or password does not match");
   }
 });
 
@@ -38,7 +38,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // checking if the user already exists
   if (userIsAlreadyTaken) {
     res.status(400);
-    throw new Error('User already exists');
+    throw new Error("User already exists");
   }
 
   // creating the user
@@ -59,8 +59,16 @@ const registerUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(400);
-    throw new Error('Invalid user data');
+    throw new Error("Invalid user data");
   }
+});
+
+// @desc    Get all users
+// @route   GET api/users
+// @acces   Private/Admin
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
 });
 
 // @desc    Get profile
@@ -78,8 +86,8 @@ const getProfile = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error('User not found');
+    throw new Error("User not found");
   }
 });
 
-export { authUser, getProfile, registerUser };
+export { authUser, getProfile, registerUser, getUsers };
