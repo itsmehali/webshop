@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CartScreen from "./screens/CartScreen";
 import ProductScreen from "./screens/ProductScreen";
+import ProductUpdateScreen from "./screens/ProductUpdateScreen";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
@@ -12,7 +13,8 @@ import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import OrderScreen from "./screens/OrderScreen";
 import OrderSuccess from "./components/OrderSuccess";
-import UsersScreen from "./screens/UsersScreen";
+import OrderAdminScreen from "./screens/OrdersAdminScreen";
+import AdminProductsScreen from "./screens/AdminProductsScreen";
 
 const App = () => {
   return (
@@ -36,7 +38,13 @@ const App = () => {
           <Route path="/success" component={OrderSuccess} />
 
           {/* Adming section*/}
-          <Route path="/admin/userlist" component={UsersScreen} />
+          {/* <Route path="/admin/userlist" component={UsersScreen} /> */}
+          <Route path="/admin/productlist" component={AdminProductsScreen} />
+          <Route path="/admin/orderlist" component={OrderAdminScreen} />
+          <Route
+            path="/admin/product/:id/edit"
+            component={ProductUpdateScreen}
+          />
         </Container>
       </main>
       <Footer />

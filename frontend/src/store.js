@@ -4,24 +4,26 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import {
   productListReducer,
   productDetailsReducer,
+  productCreateReducer,
+  productUpdateReducer,
+  productDeleteReducer,
 } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
-import {
-  userLoginReducer,
-  userRegisterReducer,
-  userListReducer,
-} from "./reducers/userReducers";
-import { orderCreateReducer } from "./reducers/orderReducers";
+import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
+import { orderCreateReducer, orderAllReducer } from "./reducers/orderReducers";
 
 const reducer = combineReducers({
   //combaning the reducers
   productList: productListReducer,
   productDetails: productDetailsReducer,
+  productCreate: productCreateReducer,
+  productUpdate: productUpdateReducer,
+  productDelete: productDeleteReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
-  userList: userListReducer,
   orderCreate: orderCreateReducer,
+  orderAll: orderAllReducer,
 });
 
 // getting the storage from cart

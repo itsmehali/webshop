@@ -1,5 +1,13 @@
-import asyncHandler from 'express-async-handler';
-import Order from '../models/Order.js';
+import asyncHandler from "express-async-handler";
+import Order from "../models/Order.js";
+
+// @desc    Get all orders
+// @route   GET api/orders
+// @acces   Private
+const getAllOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({});
+  res.json(orders);
+});
 
 // @desc    Create order
 // @route   POST api/orders
@@ -17,7 +25,7 @@ const newOrderItems = asyncHandler(async (req, res) => {
 
   if (orderItems && orderItems.length === 0) {
     res.status(400);
-    throw new Error('No order items');
+    throw new Error("No order items");
     return;
   } else {
     const order = new Order({
@@ -37,4 +45,4 @@ const newOrderItems = asyncHandler(async (req, res) => {
   }
 });
 
-export { newOrderItems };
+export { newOrderItems, getAllOrders };
