@@ -34,3 +34,5 @@ yarn-error.log*
 
 # Local History for Visual Studio Code
 .history/
+
+/frontend/build
