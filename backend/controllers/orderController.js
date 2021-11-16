@@ -5,7 +5,7 @@ import Order from "../models/Order.js";
 // @route   GET api/orders
 // @acces   Private
 const getAllOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({});
+  const orders = await Order.find({}).populate("user", "id name");
   res.json(orders);
 });
 
